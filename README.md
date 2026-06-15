@@ -1,1 +1,2 @@
-webpage to share oriental phiosophy, especially from Korea, that is to say K-philosophy
+# Production V4
+Original HTML preserved with SEO/PWA enhancements.
