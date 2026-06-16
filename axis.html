@@ -466,8 +466,8 @@
                 data: {
                     labels: ['A', 'B', 'C', 'D', 'E'],
                     datasets: [
-                        { type: 'bar', label: 'Particle (Yang)', data: [10, 8, 12, 5, 9], backgroundColor: 'rgba(59, 130, 246, 0.6)' },
-                        { type: 'line', label: 'Wave (Yin)', data: [2, 15, 4, 12, 6], borderColor: 'rgb(239, 68, 68)', borderWidth: 2, tension: 0.2 }
+                        { type: 'bar', label: '입자 (양)', data: [10, 8, 12, 5, 9], backgroundColor: 'rgba(59, 130, 246, 0.6)' },
+                        { type: 'line', label: '파동 (음)', data: [2, 15, 4, 12, 6], borderColor: 'rgb(239, 68, 68)', borderWidth: 2, tension: 0.2 }
                     ]
                 },
                 options: { 
@@ -518,7 +518,7 @@
                 btnSync.className = "px-5 py-2.5 bg-gray-200 text-gray-700 rounded-lg text-sm font-medium hover:bg-gray-300 cursor-pointer transition";
             } else {
                 dualityChartInstance.data.datasets = [{
-                    type: 'line', label: 'Unified Energy', data: [12, 18, 16, 17, 15],
+                    type: 'line', label: '통합된 에너지', data: [12, 18, 16, 17, 15],
                     backgroundColor: 'rgba(139, 92, 246, 0.2)', borderColor: 'rgb(139, 92, 246)', borderWidth: 3, fill: true, tension: 0.4
                 }];
                 caption.innerText = currentLang === 'ko' ? "현재: 동시성 (통합된 에너지)" : langData[currentLang]['caption_sync'];
