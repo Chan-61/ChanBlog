@@ -54,15 +54,67 @@
             .nav-dots { display: none; }
         }
 
-        /* 사이드바 스타일 */
-        .sidebar { background-color: #f7f7f5; padding: 20px; border-right: 1px solid #e0e0e0; flex-shrink: 0; }
-        .profile-area { margin-bottom: 30px; font-weight: bold; font-size: 1.2rem; color: #d97706; }
-        .menu-item {
-            padding: 12px 10px; cursor: pointer; border-radius: 6px; color: #555;
-            transition: all 0.2s; display: flex; align-items: center; margin-bottom: 5px;
-        }
-        .menu-item:hover { background-color: #e2e8f0; color: #d97706; }
-        .menu-item i { margin-right: 12px; width: 20px; text-align: center; }
+      /* 사이드바 전체 컨테이너 */
+.sidebar { 
+    background-color: #f7f7f5; /* 기존 노션풍 배경색 유지 */
+    padding: 32px 24px;        /* 위아래 및 좌우 여백을 넓혀 시각적 답답함 해소 */
+    border-right: 1px solid #eaeaea; 
+    flex-shrink: 0; 
+    width: 260px;              /* 사이드바의 안정적인 기본 너비 확보 */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                  /* 메뉴 아이템 간의 기본 흐름 간격 */
+}
+
+/* 프로필 및 상단 타이틀 영역 (예: ⚛️ 3 축) */
+.profile-area { 
+    margin-bottom: 28px;       /* 메뉴 시작 전 여유로운 여백 */
+    padding-left: 10px;        /* 왼쪽 정렬 선을 맞추기 위한 미세 조정 */
+    font-weight: 700;          /* 조금 더 두껍게 강조 */
+    font-size: 1.35rem;        /* 이미지의 시원한 크기 반영 */
+    color: #d97706;            /* 메인 포인트 오렌지 컬러 */
+    display: flex;
+    align-items: center;
+    gap: 8px;                  /* 아이콘과 텍스트 사이 간격 */
+}
+
+/* 개별 메뉴 아이템 (기, 승, 전, 결, Q&A) */
+.menu-item {
+    padding: 10px 14px;        /* 좌우 여백을 넓혀 안정적인 사각형 형태 유지 */
+    cursor: pointer; 
+    border-radius: 8px;        /* 부드러운 라운딩 효과 */
+    color: #4a4a4a;            /* 텍스트 가독성을 높인 짙은 그레이 */
+    font-size: 1.1rem;         /* 본문과 균형을 이루는 최적의 크기 */
+    font-weight: 500;          /* 중중간 정도의 깔끔한 굵기 */
+    line-height: 1.5;
+    transition: all 0.2s ease-in-out; 
+    display: flex; 
+    align-items: center; 
+    margin-bottom: 4px;        /* 아이템 간의 간격 균형 */
+}
+
+/* 메뉴 아이템 내 아이콘 스타일 (홈, 공유, 발자국, 체크, 이메일 등) */
+.menu-item i { 
+    margin-right: 14px;        /* 이미지처럼 아이콘과 텍스트 사이를 충분히 확보 */
+    font-size: 1.25rem;        /* 아이콘이 텍스트보다 살짝 크게 보여 시각적 안정감 부여 */
+    color: #555555;            /* 기본 아이콘 색상 */
+    width: 24px;               /* 정렬이 흐트러지지 않도록 고정 폭 설정 */
+    text-align: center; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 마우스 호버(Hover) 시 스타일 */
+.menu-item:hover { 
+    background-color: #efefe9; /* 배경과 결이 같은 자연스러운 그레이-베이지 톤 호버 */
+    color: #d97706;            /* 호버 시 텍스트가 오렌지색으로 변경 */
+}
+
+/* 호버 시 아이콘도 함께 색상이 변하도록 연동 */
+.menu-item:hover i {
+    color: #d97706;
+}
 
         /* 메인 콘텐츠 영역 */
         .content-wrapper { max-width: 900px; margin: 0 auto; padding: 40px 40px 100px 40px; }
