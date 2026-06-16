@@ -66,16 +66,56 @@
     gap: 8px;                  /* 메뉴 아이템 간의 기본 흐름 간격 */
 }
 
-/* 프로필 및 상단 타이틀 영역 (예: ⚛️ 3 축) */
+/* 프로필 및 상단 타이틀 영역 (크기 확대 및 로고 밸런스 조정) */
 .profile-area { 
-    margin-bottom: 28px;       /* 메뉴 시작 전 여유로운 여백 */
-    padding-left: 10px;        /* 왼쪽 정렬 선을 맞추기 위한 미세 조정 */
-    font-weight: 700;          /* 조금 더 두껍게 강조 */
-    font-size: 1.35rem;        /* 이미지의 시원한 크기 반영 */
-    color: #d97706;            /* 메인 포인트 오렌지 컬러 */
+    margin-top: 10px;
+    margin-bottom: 36px;       /* 메뉴와의 간격을 조금 더 넓혀 독립성 확보 */
+    padding-left: 6px; 
     display: flex;
     align-items: center;
-    gap: 8px;                  /* 아이콘과 텍스트 사이 간격 */
+    gap: 14px;                 /* 로고와 글자 사이의 최적의 여백 */
+}
+
+/* 새로 추가된 3축 로고 마크 (CSS 애니메이션 효과 포함) */
+.logo-3axis {
+    width: 38px;               /* 타이틀 크기에 맞춘 로고 크기 */
+    height: 38px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* 로고의 중심점 */
+.logo-3axis .core {
+    width: 8px;
+    height: 8px;
+    background-color: #d97706;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+/* 3개의 축을 상징하는 교차 궤도 선 */
+.logo-3axis .orbit {
+    position: absolute;
+    width: 100%;
+    height: 32%;
+    border: 2px solid #d97706;
+    border-radius: 50%;
+    opacity: 0.85;
+}
+.logo-3axis .orbit:nth-child(1) { transform: rotate(0deg); }
+.logo-3axis .orbit:nth-child(2) { transform: rotate(60deg); }
+.logo-3axis .orbit:nth-child(3) { transform: rotate(120deg); }
+
+/* '3축' 텍스트 스타일 변형 (더 크게, 더 선명하게) */
+.profile-area .title-text {
+    font-size: 1.65rem;        /* 기존 1.35rem에서 대폭 확대하여 시각적 존재감 부여 */
+    font-weight: 800;          /* 가장 두꺼운 자중으로 변경하여 묵직한 안정감 제공 */
+    color: #d97706;            /* 메인 오렌지 컬러 상속 */
+    letter-spacing: -0.03em;   /* 자간을 살짝 좁혀 타이포그래피의 완성도를 높임 */
+    line-height: 1;
 }
 
 /* 개별 메뉴 아이템 (기, 승, 전, 결, Q&A) */
@@ -169,7 +209,15 @@
 
     <aside class="sidebar" id="sidebar">
         <div class="close-btn" onclick="toggleSidebar()"><i class="fas fa-times fa-lg"></i></div>
-        <div class="profile-area"><i class="fas fa-atom"></i> 3 축</div>
+        <div class="profile-area">
+    <div class="logo-3axis">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="core"></div>
+    </div>
+    <span class="title-text">3 축</span>
+</div>
         <nav>
             <div class="menu-item" onclick="scrollToId('intro')"><i class="fas fa-home"></i> <span data-key="menu_intro">개념</span></div>
             <div class="menu-item" onclick="scrollToId('development')"><i class="fas fa-project-diagram"></i> <span data-key="menu_dev">통합</span></div>
