@@ -362,15 +362,24 @@
                 </div>
             </section>
 
-            <section id="qna-area" class="qa-box">
+           <section id="qna-area" class="qa-box">
     <h3 class="text-xl font-bold mb-2" data-key="qna_title">질문과 토론</h3>
-    <p class="text-sm text-gray-500 mb-4" data-key="qna_info">작성하신 내용은 이메일 클라이언트를 통해 작성자에게 바로 전송됩니다.</p>
+    <p class="text-sm text-gray-500 mb-4" data-key="qna_info">
+        아래 버튼을 누르면 <b>네이버 메일 쓰기 화면</b>으로 연결됩니다.<br>
+        (수신인: <span class="font-semibold text-amber-700">vlckang@naver.com</span>)
+    </p>
     
-    <textarea id="qna-content" class="w-full p-4 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm bg-gray-50 transition-all" rows="4" placeholder="메시지를 입력하세요..."></textarea>
+    <textarea id="qna-content" class="w-full p-4 border border-gray-200 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-amber-500 text-sm bg-gray-50 transition-all" rows="4" placeholder="작성하신 내용을 복사(Ctrl+C)한 후 아래 버튼을 눌러 메일 본문에 붙여넣어주세요..."></textarea>
     
-    <button id="btn-sendEmail" class="mt-4 w-full md:w-auto px-8 py-3.5 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700 cursor-pointer transition shadow-md flex items-center justify-center gap-2">
-        <i class="fas fa-paper-plane text-sm"></i> <span data-key="btn_send">보내기</span>
-    </button>
+    <div class="flex flex-col md:flex-row gap-3 mt-4">
+        <button id="btn-sendEmail" class="w-full md:flex-1 px-8 py-3.5 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700 cursor-pointer transition shadow-md flex items-center justify-center gap-2">
+            <i class="fas fa-envelope text-sm"></i> <span>네이버 메일로 보내기</span>
+        </button>
+        
+        <button id="btn-copyEmail" class="w-full md:w-auto px-6 py-3.5 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 cursor-pointer transition flex items-center justify-center gap-2" onclick="copyEmailAddress()">
+            <i class="fas fa-copy text-sm"></i> <span>이메일 주소 복사</span>
+        </button>
+    </div>
 </section>
 
             <footer class="mt-20 text-center text-gray-400 text-sm pb-10">
@@ -452,32 +461,42 @@
     }
 });
 
-// 이메일 발송 기능
-function sendEmail() {
-    const contentArea = document.getElementById('qna-content');
-    if (!contentArea) return;
-
-    const content = contentArea.value;
-    if (!content.trim()) { 
-        alert("내용을 입력해주세요!"); 
-        return; 
+document.addEventListener("DOMContentLoaded", function() {
+    const sendButton = document.getElementById('btn-sendEmail');
+    if (sendButton) {
+        sendButton.addEventListener('click', sendViaNaverMail);
     }
+});
+
+// 차선책: 네이버 메일 쓰기 링크로 바로 연결
+function sendViaNaverMail() {
+    const myEmail = "vlckang@naver.com";
     
-    const myEmail = "vlckang@naver.com"; 
-    const subject = encodeURIComponent("[우주와 나] 문의사항");
+    // 네이버 메일 '받는 사람' 파라미터가 포함된 웹 링크 URL
+    // 사용자가 네이버 로그인 상태라면 바로 메일 쓰기 창이 열리며 수신인에 이메일이 입력됩니다.
+    const naverMailUrl = `https://mail.naver.com/?v=write&to=${myEmail}`;
     
-    // 사용자가 입력한 줄바꿈(\n)이 이메일 본문에서도 깨지지 않고 잘 반영되도록 인코딩 조정
-    const body = encodeURIComponent(content);
-    
-    // 이메일 클라이언트 호출
-    window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
-    
-    // 사용자가 보낸 후 입력창을 깔끔하게 비워줌 (편의성 개선)
-    setTimeout(() => {
-        contentArea.value = "";
-    }, 500);
+    // 새 창(새 탭)으로 네이버 메일 열기
+    window.open(naverMailUrl, '_blank');
 }
 
+// 보조 기능: 이메일 주소 클립보드 복사
+function copyEmailAddress() {
+    const myEmail = "vlckang@naver.com";
+    
+    navigator.clipboard.writeText(myEmail).then(() => {
+        alert("이메일 주소(vlckang@naver.com)가 복사되었습니다.\n메일 앱에서 받는 사람에 붙여넣기(Ctrl+V) 하세요.");
+    }).catch(err => {
+        // 구형 브라우저 대응용 fallback
+        const t = document.createElement("textarea");
+        document.body.appendChild(t);
+        t.value = myEmail;
+        t.select();
+        document.execCommand('copy');
+        document.body.removeChild(t);
+        alert("이메일 주소가 복사되었습니다.");
+    });
+}
         // [3] 차트 인스턴스 핸들러 및 피드백 수정
         let dualityChartInstance = null;
         
